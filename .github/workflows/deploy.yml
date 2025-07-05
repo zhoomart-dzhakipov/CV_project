@@ -1,16 +1,19 @@
-name: Deploy Infrastructure
+- name: Set up Terraform
+  uses: hashicorp/setup-terraform@v2
 
-on:
-  push:
-    branches: [main]
+- name: Terraform Init
+  run: terraform init
+  working-directory: ./terraform
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+- name: Terraform Apply
+  run: |
+    terraform apply -auto-approve \
+      -var="hcloud_token=${{ secrets.HETZNER_TOKEN }}" \
+      -var="ssh_public_key=${{ secrets.PUBLIC_SSH_KEY }}"
+  working-directory: ./terraform
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Placeholder step
-        run: echo "CI/CD pipeline initialized. Terraform/Ansible steps will be added next."
+- name: Extract IP
+  id: tf_output
+  run: |
+    echo "SERVER_IP=$(terraform output -raw public_ip)" >> $GITHUB_ENV
+  working-directory: ./terraform
