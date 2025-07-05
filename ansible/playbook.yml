@@ -1,0 +1,6 @@
+- name: Configure VPS and deploy services
+  hosts: all
+  become: yes
+
+  roles:
+    - docker
