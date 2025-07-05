@@ -30,3 +30,17 @@ jobs:
         id: get_ip
         run: echo "SERVER_IP=$(terraform output -raw public_ip)" >> $GITHUB_ENV
         working-directory: ./terraform
+
+
+      - name: Write SSH key to file
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+
+      - name: Run Ansible
+        run: |
+          echo "[vps]" > ansible/inventory.ini
+          echo "${{ env.SERVER_IP }} ansible_user=root ansible_ssh_private_key_file=./key.pem" >> ansible/inventory.ini
+
+          ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+
