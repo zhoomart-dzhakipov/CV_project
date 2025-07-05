@@ -9,4 +9,4 @@ This is a fully automated deployment project using:
 
 Includes: Nginx, HAProxy, Grafana, Prometheus, and a personal HTML site with optional game features.
 
-🚀 Push to `main` → full deployment on Hetzner VPS
+🚀 Push to `main` → full deployment on Hetzner VPS 
