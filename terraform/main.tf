@@ -12,7 +12,7 @@ provider "hcloud" {
 }
 
 data "hcloud_ssh_key" "existing" {
-  name = var.default-key  # имя ключа, уже добавленного в Hetzner
+  name = var.ssh_key_name  # имя ключа, уже добавленного в Hetzner
 }
 
 resource "hcloud_ssh_key" "default" {
