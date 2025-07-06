@@ -12,7 +12,7 @@ provider "hcloud" {
 }
 
 resource "hcloud_ssh_key" "default" {
-  name       = "default-key"
+  name       = "protfolio-key-01"
   public_key = var.ssh_public_key
 }
 
