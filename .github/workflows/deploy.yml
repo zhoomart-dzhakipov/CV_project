@@ -23,7 +23,8 @@ jobs:
         run: |
           terraform apply -auto-approve \
             -var="hcloud_token=${{ secrets.HETZNER_TOKEN }}" \
-            -var="ssh_public_key=${{ secrets.PUBLIC_SSH_KEY }}"
+            -var="ssh_public_key=${{ secrets.PUBLIC_SSH_KEY }}" \
+            -var="ssh_key_name=${{ secrets.SSH_KEY_NAME }}"
         working-directory: ./terraform
 
       - name: Extract Hetzner IP
